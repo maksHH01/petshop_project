@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 40px 28px 40px;
+  border-bottom: 1px solid #ddd;
+}
+
+.navLinksContainer {
+  display: flex;
+  gap: 32px;
+}
+
+.navLinksContainer a {
+  text-decoration: none;
+  line-height: 130%;
+  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.mainLogoContainer img,
+.basketLogoContainer img {
+  display: block;
+  height: auto;
+  width: auto;
+  max-height: 60px;
+  cursor: pointer;
+}
+
+.basketLogoContainer img {
+  max-height: 48px;
+  max-width: 48px;
+}
+
+.navLinksContainer a.active {
+  color: #0d50ff;
+}
+
+.navLinksContainer a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #0d50ff;
+  transition: width 0.3s ease;
+}
+
+.navLinksContainer a:hover::after,
+.navLinksContainer a.active::after {
+  width: 100%;
+}

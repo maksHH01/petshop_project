@@ -1,0 +1,32 @@
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  background-color: #f1f3f4;
+  border-radius: 12px;
+  box-shadow: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.itemContainer:hover {
+  transform: translateY(-4px);
+}
+
+.labelFooter {
+  color: #8b8b8b;
+  line-height: 130%;
+  transition: color 0.3s ease;
+}
+
+.footerContacts {
+  font-size: clamp(20px, 4vw, 40px);
+  font-weight: 600;
+  line-height: 110%;
+  transition: color 0.3s ease;
+}
+
+.itemContainer:hover .labelFooter,
+.itemContainer:hover .footerContacts {
+  color: #0d50ff;
+}

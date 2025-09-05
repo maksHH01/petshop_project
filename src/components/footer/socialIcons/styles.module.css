@@ -1,0 +1,15 @@
+.socialIcons {
+  display: flex;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.socialIcons img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease;
+}
+
+.socialIcons a:hover img {
+  transform: scale(1.1);
+}
