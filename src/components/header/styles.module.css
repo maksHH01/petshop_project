@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 40px 28px 40px;
+  padding: clamp(20px, 2.5vw, 30px) clamp(16px, 5%, 40px);
   border-bottom: 1px solid #ddd;
   background-color: #fff;
   position: sticky;
@@ -12,7 +12,7 @@
 
 .navLinksContainer {
   display: flex;
-  gap: 32px;
+  gap: clamp(20px, 2vw, 32px);
 }
 
 .navLinksContainer a {
@@ -51,16 +51,12 @@
   width: auto;
   cursor: pointer;
   transition: transform 0.3s ease;
+  max-height: clamp(36px, 6vw, 70px);
+  max-width: clamp(36px, 6vw, 70px);
 }
 
 .mainLogoContainer img:hover {
   transform: scale(1.05) rotate(-2deg);
-}
-
-.basketLogoContainer img {
-  max-height: 48px;
-  max-width: 48px;
-  transition: transform 0.3s ease;
 }
 
 .basketLogoContainer img:hover {
