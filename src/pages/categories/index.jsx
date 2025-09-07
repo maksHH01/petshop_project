@@ -8,9 +8,8 @@ import SkeletonLoader from "../../components/skeleton";
 import CustomBreadcrumbs from "../../components/breadcrumb";
 import styles from "./styles.module.css";
 import ProductItem from "../../components/productItem";
-
-export const BASE_URL = "http://localhost:3333/categories";
-export const PRODUCTS_URL = "http://localhost:3333/products/all";
+import { PRODUCTS_URL } from "../../redux/slices/productSlice";
+import { BASE_URL } from "../../redux/slices/categorySlice";
 
 function CategoriesPage() {
   const navigate = useNavigate();
@@ -62,7 +61,7 @@ function CategoriesPage() {
       setLoading(true);
       setFetchError(null);
       try {
-        const { data } = await axios.get(PRODUCTS_URL);
+        const { data } = await axios.get(`${PRODUCTS_URL}/all`);
         if (isMounted) {
           const filtered = data.filter((p) => p.categoryId === Number(id));
           setProducts(filtered);
