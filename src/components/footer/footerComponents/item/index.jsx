@@ -5,7 +5,7 @@ export default function FooterItem({ title, children, sx }) {
   return (
     <Paper
       sx={{
-        padding: 4,
+        padding: "clamp(16px, 2vw, 32px)",
         backgroundColor: "#f1f3f4",
         boxShadow: "none",
         borderRadius: "12px",

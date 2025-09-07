@@ -1,25 +1,33 @@
 import "./App.css";
 import Header from "./components/header";
 import Main from "./pages/main/index";
-import Categories from "./pages/categories";
 import Products from "./pages/products";
 import Sales from "./pages/sales";
-import { Routes, Route } from "react-router-dom";
 import Basket from "./pages/basket";
 import Footer from "./components/footer";
+import ScrollToTop from "./components/scrollTop";
+
+import { Routes, Route } from "react-router-dom";
+import CategoriesLayout from "./components/categoriesLayout";
+import CategoriesPage from "./pages/categories";
+import ProductPage from "./pages/productPage";
 
 function App() {
   return (
     <div className="container">
       <Header />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/categories" element={<Categories />} />
+        <Route path="/categories" element={<CategoriesLayout />}>
+          <Route index element={<CategoriesPage />} />
+          <Route path=":id" element={<CategoriesPage />} />
+        </Route>
         <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/sales" element={<Sales />} />
         <Route path="/basket" element={<Basket />} />
       </Routes>
-      <Main />
       <Footer />
     </div>
   );

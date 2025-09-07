@@ -1,0 +1,38 @@
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0px;
+  width: fit-content;
+  min-width: 200px;
+}
+
+.btn {
+  width: 58px;
+  height: 58px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.btn:hover {
+  background: #f5f5f5;
+}
+
+.value {
+  min-width: 50px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 130%;
+}

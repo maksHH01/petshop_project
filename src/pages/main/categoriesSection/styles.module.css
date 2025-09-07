@@ -1,0 +1,40 @@
+.categoriesContainer {
+  margin-top: 80px;
+  width: 100%;
+}
+
+.carouselWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.carousel {
+  display: flex;
+  gap: 28px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 16px 0;
+  width: 100%;
+}
+
+.carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.scrollButton.left {
+  left: 3px;
+}
+
+.scrollButton.right {
+  right: 3px;
+}

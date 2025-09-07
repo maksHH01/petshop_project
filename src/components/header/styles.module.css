@@ -4,6 +4,10 @@
   align-items: center;
   padding: 30px 40px 28px 40px;
   border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navLinksContainer {
@@ -14,26 +18,14 @@
 .navLinksContainer a {
   text-decoration: none;
   line-height: 130%;
-  transition: color 0.3s ease, transform 0.2s ease;
+  font-weight: 500;
   position: relative;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.mainLogoContainer img,
-.basketLogoContainer img {
-  display: block;
-  height: auto;
-  width: auto;
-  max-height: 60px;
-  cursor: pointer;
-}
-
-.basketLogoContainer img {
-  max-height: 48px;
-  max-width: 48px;
-}
-
-.navLinksContainer a.active {
+.navLinksContainer a:hover {
   color: #0d50ff;
+  transform: translateY(-2px);
 }
 
 .navLinksContainer a::after {
@@ -50,4 +42,47 @@
 .navLinksContainer a:hover::after,
 .navLinksContainer a.active::after {
   width: 100%;
+}
+
+.mainLogoContainer img,
+.basketLogoContainer img {
+  display: block;
+  height: auto;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.mainLogoContainer img:hover {
+  transform: scale(1.05) rotate(-2deg);
+}
+
+.basketLogoContainer img {
+  max-height: 48px;
+  max-width: 48px;
+  transition: transform 0.3s ease;
+}
+
+.basketLogoContainer img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: #0d50ff;
+  transition: width 0.3s ease;
+}
+
+.navLink:hover::after,
+.activeLink::after {
+  width: 100%;
+}
+
+.activeLink {
+  color: #0d50ff;
 }

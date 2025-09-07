@@ -1,0 +1,140 @@
+.formContainer {
+  background: linear-gradient(261deg, #2451c6 32.63%, #0d50ff 98.96%);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 32px;
+  margin-top: 106px;
+  width: 100%;
+}
+
+.formDisplay {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.imgBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1 1 50%;
+  order: 1;
+}
+
+.imgBox img {
+  max-width: 783px;
+  width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.imgBox img:hover {
+  transform: scale(1);
+  filter: brightness(1.1);
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 516px;
+  gap: 16px;
+  flex: 1 1 50%;
+  order: 2;
+}
+
+.btnStyles {
+  max-width: 516px;
+  padding: 16px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 6px;
+  border: none;
+  /* margin-top: 16px; */
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.btnStyles:hover {
+  background: #d8e0f3;
+  /* transform: scale(1); */
+  box-shadow: 0 4px 12px rgba(13, 80, 255, 0.5);
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+.btnStyles:active {
+  transform: scale(1);
+  box-shadow: 0 2px 6px rgba(13, 80, 255, 0.5);
+}
+
+.errorContainer {
+  display: flex;
+  /* flex-direction: column; */
+  /* margin-top: 10px; */
+  min-height: 15px;
+}
+
+.error {
+  color: #ff3300;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.success {
+  color: #00ff88;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+@media (max-width: 1176px) {
+  .formDisplay {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .imgBox {
+    order: 2;
+    width: 100%;
+    margin-top: 0px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .inputBox {
+    order: 1;
+    width: 100%;
+    padding-bottom: 0px;
+  }
+
+  .btnStyles,
+  .inputStyles {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .formDisplay {
+    flex-direction: column;
+  }
+
+  .imgBox {
+    order: 2;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  .inputBox {
+    order: 1;
+    width: 100%;
+  }
+
+  .btnStyles,
+  .inputStyles {
+    width: 100%;
+  }
+}

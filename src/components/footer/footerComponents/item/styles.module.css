@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 16px;
   background-color: #f1f3f4;
   border-radius: 12px;
   box-shadow: none;
@@ -17,6 +16,7 @@
   color: #8b8b8b;
   line-height: 130%;
   transition: color 0.3s ease;
+  font-size: 20px;
 }
 
 .footerContacts {

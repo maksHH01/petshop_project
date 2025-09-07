@@ -1,13 +1,26 @@
 .introBlock {
-  width: 50%;
-  height: 600px;
-  background-image: url(/src/assets/images/mainPetsImage.png);
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 600px;
+  background-image: url("../../../assets/images/mainPetsImage.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
+  text-align: start;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 80px;
+}
+
+.content h1 {
+  color: #fff;
+  font-size: clamp(32px, 8vw, 96px);
+  font-weight: 700;
+  line-height: 110%;
+  max-width: 17ch;
 }
