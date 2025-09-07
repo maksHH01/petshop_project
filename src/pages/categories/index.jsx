@@ -10,6 +10,7 @@ import styles from "./styles.module.css";
 import ProductItem from "../../components/productItem";
 import { PRODUCTS_URL } from "../../redux/slices/productSlice";
 import { BASE_URL } from "../../redux/slices/categorySlice";
+import CategoryFilters from "../../components/componentFilters";
 
 function CategoriesPage() {
   const navigate = useNavigate();
@@ -95,6 +96,7 @@ function CategoriesPage() {
     return (
       <div className={styles.container}>
         <h2>{category.title}</h2>
+        <CategoryFilters />
         <ul className={styles.list}>
           {products.map((product) => (
             <ProductItem
