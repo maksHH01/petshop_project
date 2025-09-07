@@ -4,17 +4,18 @@ import { NavLink } from "react-router-dom";
 
 const buttonSx = {
   color: "#8B8B8B",
-  borderColor: "#DDD",
-  padding: "8px 16px",
-  fontFamily: "Montserrat",
   fontSize: "16px",
   fontWeight: 500,
-  lineHeight: 1.3,
+  borderColor: "#DDD",
   textTransform: "none",
   borderRadius: "6px",
+  padding: "8px 16px",
+  fontFamily: "Montserrat",
+  lineHeight: 1.3,
   transition: "all 0.3s",
   "&:hover": {
-    color: "#0d50ff",
+    backgroundColor: "#F1F3F4",
+    color: "#8B8B8B",
   },
 };
 

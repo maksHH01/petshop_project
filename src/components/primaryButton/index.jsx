@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { NavLink } from "react-router-dom";
 
 const PrimaryButton = ({
   children,
@@ -34,6 +35,8 @@ const PrimaryButton = ({
   }
   return (
     <Button
+      disableElevation
+      disableRipple
       variant="contained"
       className={className}
       onClick={handleClick}
@@ -43,8 +46,24 @@ const PrimaryButton = ({
         textTransform: "none",
         lineHeight: 1.3,
         backgroundColor: "#0D50FF",
+        boxShadow: "none",
         "&:hover": {
           backgroundColor: "#282828",
+          boxShadow: "none",
+        },
+        "&:active": {
+          backgroundColor: "#FFF",
+          border: "1px solid #282828",
+          color: "#282828",
+          boxShadow: "none",
+        },
+        "&:focus": {
+          outline: "none",
+        },
+        "&.Mui-disabled": {
+          backgroundColor: "#0D50FF",
+          color: "#fff",
+          opacity: 1,
         },
         ...sx,
       }}

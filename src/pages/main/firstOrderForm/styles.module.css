@@ -53,28 +53,26 @@
   gap: 10px;
   border-radius: 6px;
   border: none;
-  /* margin-top: 16px; */
   transition: all 0.3s ease;
   margin-bottom: 15px;
 }
 
 .btnStyles:hover {
-  background: #d8e0f3;
-  /* transform: scale(1); */
-  box-shadow: 0 4px 12px rgba(13, 80, 255, 0.5);
-  border: 1px solid white;
+  background: #282828;
+  color: #fff;
+  border: none;
   cursor: pointer;
 }
 
 .btnStyles:active {
+  background-color: #f1f3f4;
+  color: #0d50ff;
   transform: scale(1);
   box-shadow: 0 2px 6px rgba(13, 80, 255, 0.5);
 }
 
 .errorContainer {
   display: flex;
-  /* flex-direction: column; */
-  /* margin-top: 10px; */
   min-height: 15px;
 }
 
