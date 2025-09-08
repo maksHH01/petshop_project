@@ -12,7 +12,7 @@ function ProductInfo({ title, image, price, discont_price, description }) {
     : 0;
 
   return (
-    <div className={`${styles.productInfo} wrapper`}>
+    <div className={styles.productInfo}>
       <div className={styles.imgContainer}>
         <img src={`http://localhost:3333${image}`} alt={title} />
       </div>

@@ -25,7 +25,7 @@ function ProductPage() {
           const { data: categoryData } = await axios.get(
             `http://localhost:3333/categories/${productData.categoryId}`
           );
-          setCategory(categoryData.category);
+          setCategory(categoryData.category || categoryData);
         }
       } catch (err) {
         setError("Error failed");
@@ -55,17 +55,16 @@ function ProductPage() {
   breadcrumbsItems.push({ label: product.title });
 
   return (
-    <>
+    <div className="wrapper">
       <CustomBreadcrumbs items={breadcrumbsItems} />
       <ProductInfo
-        key={product.id}
         title={product.title}
         image={product.image}
         price={product.price}
         discont_price={product.discont_price}
         description={product.description}
       />
-    </>
+    </div>
   );
 }
 

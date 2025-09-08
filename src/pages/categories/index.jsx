@@ -1,114 +1,68 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import CategoriesItem from "../../components/categoriesItem";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories } from "../../redux/slices/categorySlice";
+import { fetchProducts } from "../../redux/slices/productSlice";
 import SkeletonLoader from "../../components/skeleton";
 import CustomBreadcrumbs from "../../components/breadcrumb";
-import styles from "./styles.module.css";
+import CategoriesItem from "../../components/categoriesItem";
 import ProductItem from "../../components/productItem";
-import { PRODUCTS_URL } from "../../redux/slices/productSlice";
-import { BASE_URL } from "../../redux/slices/categorySlice";
 import CategoryFilters from "../../components/componentFilters";
+import styles from "./styles.module.css";
 
 function CategoriesPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {
-    items: categories,
-    status,
-    error,
-  } = useSelector((state) => state.categories);
   const { id } = useParams();
 
-  const [category, setCategory] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [fetchError, setFetchError] = useState(null);
+  const {
+    items: categories,
+    status: categoriesStatus,
+    error: categoriesError,
+  } = useSelector((state) => state.categories);
+
+  const {
+    items: products,
+    status: productsStatus,
+    error: productsError,
+  } = useSelector((state) => state.products);
 
   useEffect(() => {
-    if (categories.length === 0) dispatch(fetchCategories());
-  }, [dispatch, categories.length]);
+    dispatch(fetchCategories());
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
-  useEffect(() => {
-    if (!id) return;
-    let isMounted = true;
+  const filteredProducts = useMemo(() => {
+    if (!id) return [];
+    return products.filter((p) => p.categoryId === Number(id));
+  }, [products, id]);
 
-    const fetchCategory = async () => {
-      setLoading(true);
-      setFetchError(null);
-      try {
-        const { data } = await axios.get(`${BASE_URL}/${id}`);
-        if (isMounted) setCategory(data.category);
-      } catch {
-        if (isMounted) setFetchError("Error loading category...");
-        setCategory(null);
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-    fetchCategory();
-    return () => {
-      isMounted = false;
-    };
-  }, [id]);
+  const category = useMemo(() => {
+    return categories.find((c) => c.id === Number(id));
+  }, [categories, id]);
 
-  useEffect(() => {
-    if (!id) return;
-    let isMounted = true;
-
-    const fetchProducts = async () => {
-      setLoading(true);
-      setFetchError(null);
-      try {
-        const { data } = await axios.get(`${PRODUCTS_URL}/all`);
-        if (isMounted) {
-          const filtered = data.filter((p) => p.categoryId === Number(id));
-          setProducts(filtered);
-        }
-      } catch {
-        if (isMounted) setFetchError("Error loading products...");
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-    fetchProducts();
-    return () => {
-      isMounted = false;
-    };
-  }, [id]);
-
-  const breadcrumbsItems = useMemo(() => {
-    const base = [{ path: "/", label: "Main Page" }];
-    base.push({ path: "/categories", label: "Categories" });
-    if (category) base.push({ label: category.title });
-    return base;
-  }, [category]);
-
-  if (status === "loading" || loading)
+  if (categoriesStatus === "loading" || productsStatus === "loading") {
     return <SkeletonLoader count={4} width={316} />;
-  if (status === "failed" || fetchError) return <h2>{error || fetchError}</h2>;
-  if (!categories || categories.length === 0)
-    return <h2>Categories not found</h2>;
+  }
+
+  if (categoriesStatus === "failed" || productsStatus === "failed") {
+    return <h2>{categoriesError || productsError}</h2>;
+  }
 
   if (id && category) {
     return (
       <div className={styles.container}>
         <h2>{category.title}</h2>
         <CategoryFilters />
-        <ul className={styles.list}>
-          {products.map((product) => (
-            <ProductItem
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              image={product.image}
-              price={product.price}
-              discont_price={product.discont_price}
-            />
-          ))}
-        </ul>
+        {filteredProducts.length > 0 ? (
+          <ul className={styles.list}>
+            {filteredProducts.map((product) => (
+              <ProductItem key={product.id} {...product} />
+            ))}
+          </ul>
+        ) : (
+          <p>No products found in this category.</p>
+        )}
       </div>
     );
   }
@@ -136,3 +90,10 @@ function CategoriesPage() {
 }
 
 export default CategoriesPage;
+
+// const breadcrumbsItems = useMemo(() => {
+//   const base = [{ path: "/", label: "Main Page" }];
+//   base.push({ path: "/categories", label: "Categories" });
+//   if (category) base.push({ label: category.title });
+//   return base;
+// }, [category]);
