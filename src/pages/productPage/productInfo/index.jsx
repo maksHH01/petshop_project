@@ -3,7 +3,6 @@ import Counter from "../../../components/counter";
 import PrimaryButton from "../../../components/primaryButton";
 import styles from "./styles.module.css";
 import ReadMoreModal from "../../../components/readMoreModal";
-import CustomBreadcrumbs from "../../../components/breadcrumb";
 
 function ProductInfo({ title, image, price, discont_price, description }) {
   const hasDiscount = discont_price && discont_price < price;

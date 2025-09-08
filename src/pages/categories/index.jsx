@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchCategories } from "../../redux/slices/categorySlice";
 import { fetchProducts } from "../../redux/slices/productSlice";
 import SkeletonLoader from "../../components/skeleton";
-import CustomBreadcrumbs from "../../components/breadcrumb";
 import CategoriesItem from "../../components/categoriesItem";
 import ProductItem from "../../components/productItem";
 import CategoryFilters from "../../components/componentFilters";
@@ -90,10 +89,3 @@ function CategoriesPage() {
 }
 
 export default CategoriesPage;
-
-// const breadcrumbsItems = useMemo(() => {
-//   const base = [{ path: "/", label: "Main Page" }];
-//   base.push({ path: "/categories", label: "Categories" });
-//   if (category) base.push({ label: category.title });
-//   return base;
-// }, [category]);
