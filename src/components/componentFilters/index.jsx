@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./styles.module.css";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
@@ -6,9 +7,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
 function CategoryFilters() {
+  const location = useLocation();
+  const isSalesPage = location.pathname.startsWith("/sales");
+
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-
   const [sort, setSort] = useState(10);
 
   const handleChange = (event) => {
@@ -52,10 +55,14 @@ function CategoryFilters() {
           placeholder="to"
         />
       </div>
-      <div className={styles.discountsBox}>
-        <p className={styles.title}>Discounted items</p>
-        <input className={styles.discountsCheckBox} type="checkbox" />
-      </div>
+
+      {!isSalesPage && (
+        <div className={styles.discountsBox}>
+          <p className={styles.title}>Discounted items</p>
+          <input className={styles.discountsCheckBox} type="checkbox" />
+        </div>
+      )}
+
       <div className={styles.sortedBox}>
         <p className={styles.title}>Sorted</p>
         <FormControl sx={{ width: 200, height: 36 }}>
