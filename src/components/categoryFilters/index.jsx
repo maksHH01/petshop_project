@@ -6,32 +6,37 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
-function CategoryFilters() {
+function CategoryFilters({ onChangeFilters }) {
   const location = useLocation();
   const isSalesPage = location.pathname.startsWith("/sales");
 
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sort, setSort] = useState(10);
+  const [discountedOnly, setDiscountedOnly] = useState(false);
 
   const handleChange = (event) => {
-    setSort(event.target.value);
+    const value = event.target.value;
+    setSort(value);
+    onChangeFilters?.({ minPrice, maxPrice, sort: value, discountedOnly });
   };
 
   const handleMinChange = (event) => {
     const value = event.target.value;
     setMinPrice(value);
-    if (onChange) {
-      onChange({ min: value, max: maxPrice });
-    }
+    onChangeFilters?.({ minPrice: value, maxPrice, sort, discountedOnly });
   };
 
   const handleMaxChange = (event) => {
     const value = event.target.value;
     setMaxPrice(value);
-    if (onChange) {
-      onChange({ min: minPrice, max: value });
-    }
+    onChangeFilters?.({ minPrice, maxPrice: value, sort, discountedOnly });
+  };
+
+  const handleDiscountChange = (event) => {
+    const value = event.target.checked;
+    setDiscountedOnly(value);
+    onChangeFilters?.({ minPrice, maxPrice, sort, discountedOnly: value });
   };
 
   return (
@@ -59,7 +64,12 @@ function CategoryFilters() {
       {!isSalesPage && (
         <div className={styles.discountsBox}>
           <p className={styles.title}>Discounted items</p>
-          <input className={styles.discountsCheckBox} type="checkbox" />
+          <input
+            className={styles.discountsCheckBox}
+            type="checkbox"
+            checked={discountedOnly}
+            onChange={handleDiscountChange}
+          />
         </div>
       )}
 
