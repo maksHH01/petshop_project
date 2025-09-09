@@ -43,22 +43,24 @@ function CategoryFilters({ onChangeFilters }) {
     <div className={styles.filtersContainer}>
       <div className={styles.priceFilters}>
         <p className={styles.title}>Price</p>
-        <input
-          className={styles.priceInputs}
-          type="number"
-          min="0"
-          value={minPrice}
-          onChange={handleMinChange}
-          placeholder="from"
-        />
-        <input
-          className={styles.priceInputs}
-          type="number"
-          min="0"
-          value={maxPrice}
-          onChange={handleMaxChange}
-          placeholder="to"
-        />
+        <div className={styles.inputsBox}>
+          <input
+            className={styles.priceInputs}
+            type="number"
+            min="0"
+            value={minPrice}
+            onChange={handleMinChange}
+            placeholder="from"
+          />
+          <input
+            className={styles.priceInputs}
+            type="number"
+            min="0"
+            value={maxPrice}
+            onChange={handleMaxChange}
+            placeholder="to"
+          />
+        </div>
       </div>
 
       {!isSalesPage && (

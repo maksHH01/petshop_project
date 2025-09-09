@@ -24,6 +24,11 @@
   border: 1px solid #ddd;
 }
 
+.inputsBox {
+  display: flex;
+  gap: 16px;
+}
+
 .discountsBox {
   display: flex;
   align-items: center;
@@ -58,4 +63,56 @@
   display: flex;
   align-items: center;
   gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .filtersContainer {
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: flex-start;
+  }
+
+  .priceFilters,
+  .discountsBox,
+  .sortedBox {
+    flex: 1 1 45%;
+    min-width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .filtersContainer {
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .priceFilters,
+  .discountsBox,
+  .sortedBox {
+    flex: 1 1 100%;
+  }
+
+  .priceFilters {
+    display: flex;
+    align-items: start;
+  }
+
+  .inputsBox {
+    flex-wrap: wrap;
+  }
+
+  .priceInputs {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .filtersContainer {
+    gap: 20px;
+    margin: 50px 0;
+  }
+
+  .title {
+    font-size: 16px;
+  }
 }
