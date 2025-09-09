@@ -35,8 +35,6 @@
   display: inline-flex;
   gap: 32px;
   align-items: end;
-  position: relative;
-  max-width: 300px;
 }
 
 .newPrice {
@@ -53,6 +51,11 @@
   text-decoration-line: line-through;
 }
 
+.oldPriceContainer {
+  position: relative;
+  display: inline-block;
+}
+
 .imgContainer img {
   width: 100%;
   height: auto;
@@ -63,8 +66,8 @@
 
 .discountBadge {
   position: absolute;
-  top: 0px;
-  right: -20px;
+  top: -15px;
+  right: -70px;
   background: #0d50ff;
   color: #fff;
   font-size: clamp(14px, 2vw, 20px);
@@ -98,7 +101,9 @@
 @media (max-width: 1024px) {
   .productInfo {
     flex-direction: column;
-    gap: 50px;
+    gap: 120px;
+    padding-top: 80px;
+    margin-top: 0px;
   }
 
   .productInfoBox {
@@ -106,8 +111,26 @@
   }
 }
 
-@media (max-width: 769px) {
-  .discountBadge {
-    right: 70px;
+@media (max-width: 525px) {
+  .productInfo {
+    padding-top: 30px;
+    margin-top: 0px;
+    gap: 60px;
+  }
+}
+
+@media (max-width: 426px) {
+  .productInfo {
+    padding-top: 10px;
+    margin-top: 0px;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 376px) {
+  .productInfo {
+    padding-top: 0px;
+    margin-top: 0px;
+    gap: 0px;
   }
 }

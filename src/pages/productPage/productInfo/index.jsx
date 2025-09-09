@@ -22,8 +22,12 @@ function ProductInfo({ title, image, price, discont_price, description }) {
           {hasDiscount ? (
             <>
               <p className={styles.newPrice}>$ {discont_price}</p>
-              <p className={styles.oldPrice}>$ {price}</p>
-              <span className={styles.discountBadge}>-{discountPercent}%</span>
+              <div className={styles.oldPriceContainer}>
+                <p className={styles.oldPrice}>$ {price}</p>
+                <span className={styles.discountBadge}>
+                  -{discountPercent}%
+                </span>
+              </div>
             </>
           ) : (
             <p className={styles.newPrice}>$ {price}</p>
