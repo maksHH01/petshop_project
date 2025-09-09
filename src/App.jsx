@@ -11,6 +11,7 @@ import { Routes, Route } from "react-router-dom";
 import PageLayout from "./components/pagesLayout";
 import CategoriesPage from "./pages/categories";
 import ProductPage from "./pages/productPage";
+import NotFoundPage from "./pages/notFoundPage";
 
 function App() {
   return (
@@ -35,8 +36,8 @@ function App() {
 
         <Route path="/sales" element={<Sales />} />
         <Route path="/basket" element={<Basket />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
       <Footer />
     </div>
   );
