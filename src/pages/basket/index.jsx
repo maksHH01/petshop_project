@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromBasket,
@@ -9,6 +9,7 @@ import PrimaryButton from "../../components/primaryButton";
 import styles from "./styles.module.css";
 import BasketItem from "./basketItem";
 import TitlePlusBtn from "../../components/titlePlusBtn";
+import SuccessModal from "./successModal";
 
 function Basket() {
   const dispatch = useDispatch();
@@ -21,25 +22,18 @@ function Basket() {
   const [success, setSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleRemove = (id) => {
-    dispatch(removeFromBasket(id));
-  };
+  const handleRemove = (id) => dispatch(removeFromBasket(id));
 
   const handleQuantityChange = (id, newQuantity) => {
     if (newQuantity < 1) return;
     dispatch(updateQuantity({ id, quantity: newQuantity }));
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const validate = () => {
-    if (
-      !formData.name.trim() ||
-      !formData.phone.trim() ||
-      !formData.email.trim()
-    ) {
+    if (!formData.name || !formData.phone || !formData.email) {
       return "Please fill in all fields";
     }
     return null;
@@ -51,7 +45,6 @@ function Basket() {
 
     setIsSubmitting(true);
     setSubmitError("");
-    setSuccess(false);
 
     const validationError = validate();
     if (validationError) {
@@ -61,22 +54,30 @@ function Basket() {
     }
 
     try {
-      await fetch("http://localhost:3333/order/send", {
+      const response = await fetch("http://localhost:3333/order/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, totalQuantity, totalPrice }),
       });
 
+      if (!response.ok) throw new Error("Server error");
+
       setSuccess(true);
       setFormData({ name: "", phone: "", email: "" });
       dispatch(clearBasket());
-    } catch (error) {
-      console.error("Error while submitting:", error);
+    } catch (err) {
+      console.error(err);
       setSubmitError("Form submission error. Please try again later.");
     }
 
     setIsSubmitting(false);
   };
+
+  useEffect(() => {
+    if (success) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [success]);
 
   const products = Object.values(items);
 
@@ -84,14 +85,15 @@ function Basket() {
     return (
       <div className={`${styles.container} wrapper`}>
         <TitlePlusBtn
-          title={"Shopping cart"}
-          buttonText={"Back to the store"}
-          buttonLink={"/products"}
+          title="Shopping cart"
+          buttonText="Back to the store"
+          buttonLink="/products"
         />
         <div className={styles.emptyBasket}>
           <p>Looks like you have no items in your basket currently.</p>
           <PrimaryButton to="/products">Continue Shopping</PrimaryButton>
         </div>
+        <SuccessModal open={success} onClose={() => setSuccess(false)} />
       </div>
     );
   }
@@ -99,9 +101,9 @@ function Basket() {
   return (
     <div className={`${styles.container} wrapper`}>
       <TitlePlusBtn
-        title={"Shopping cart"}
-        buttonText={"Back to the store"}
-        buttonLink={"/products"}
+        title="Shopping cart"
+        buttonText="Back to the store"
+        buttonLink="/products"
       />
 
       <div className={styles.itemAndFormContainer}>
@@ -123,6 +125,7 @@ function Basket() {
             <p className={styles.itemsScore}>Total</p>
             <h2>${totalPrice.toFixed(2)}</h2>
           </div>
+
           <div className={styles.inputs}>
             <input
               className={styles.inputsStyle}
@@ -159,6 +162,7 @@ function Basket() {
           </PrimaryButton>
         </form>
       </div>
+      <SuccessModal open={success} onClose={() => setSuccess(false)} />
     </div>
   );
 }
