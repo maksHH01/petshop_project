@@ -2,17 +2,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: clamp(6px, 2vw, 10px);
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 0px;
   width: fit-content;
-  min-width: 200px;
+  min-width: clamp(140px, 40%, 200px);
 }
 
 .btn {
-  width: 58px;
-  height: 58px;
+  width: clamp(42px, 10vw, 58px);
+  height: clamp(42px, 10vw, 58px);
   cursor: pointer;
   border: 1px solid #ddd;
   border-radius: 6px;
@@ -20,7 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: clamp(18px, 4vw, 24px);
   font-weight: bold;
   transition: background-color 0.2s;
 }
@@ -30,9 +30,9 @@
 }
 
 .value {
-  min-width: 50px;
+  min-width: clamp(40px, 10vw, 50px);
   text-align: center;
   font-weight: 600;
-  font-size: 18px;
+  font-size: clamp(16px, 3vw, 18px);
   line-height: 130%;
 }

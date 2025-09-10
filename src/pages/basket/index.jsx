@@ -38,15 +38,21 @@ function Basket() {
           buttonText={"Back to the store"}
           buttonLink={"/products"}
         />
-        <p>Looks like you have no items in your basket currently.</p>
-        <PrimaryButton>Continue Shopping</PrimaryButton>
+        <div className={styles.emptyBasket}>
+          <p>Looks like you have no items in your basket currently.</p>
+          <PrimaryButton to="/products">Continue Shopping</PrimaryButton>
+        </div>
       </div>
     );
   }
 
   return (
     <div className={`${styles.container} wrapper`}>
-      <h2>Your Basket</h2>
+      <TitlePlusBtn
+        title={"Shopping cart"}
+        buttonText={"Back to the store"}
+        buttonLink={"/products"}
+      />
       <ul className={styles.list}>
         {products.map((item, index) => (
           <BasketItem

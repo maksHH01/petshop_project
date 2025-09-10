@@ -13,6 +13,8 @@ const TitlePlusBtn = ({ title, buttonText, buttonLink }) => {
           component={NavLink}
           to={buttonLink}
           variant="outlined"
+          disableRipple
+          disableElevation
           sx={{
             color: "#8B8B8B",
             borderColor: "#DDD",
@@ -27,8 +29,12 @@ const TitlePlusBtn = ({ title, buttonText, buttonLink }) => {
             width: { xs: "100%", sm: "auto" },
             transition: "all 0.3s",
             "&:hover": {
-              backgroundColor: "#0d50ff",
-              color: "#fff",
+              backgroundColor: "#F1F3F4",
+              color: "#8B8B8B",
+            },
+            "&:active": {
+              color: "#282828",
+              backgroundColor: "white",
             },
           }}
         >

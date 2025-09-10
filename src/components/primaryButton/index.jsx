@@ -32,6 +32,7 @@ const PrimaryButton = ({
     boxShadow: "none",
     borderRadius: 2,
     transition: "all 0.2s ease",
+    border: "1px solid transparent",
     "&:hover": {
       backgroundColor: "#282828",
       boxShadow: "none",
@@ -40,6 +41,7 @@ const PrimaryButton = ({
       backgroundColor: "#fff",
       color: "#282828",
       border: "1px solid #282828",
+      borderColor: "#282828",
       boxShadow: "none",
       transform: "scale(0.97)",
     },

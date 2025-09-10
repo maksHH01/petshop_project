@@ -1,14 +1,14 @@
-import { useState } from "react";
 import styles from "./styles.module.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-function Counter({ initial = 1 }) {
-  const [count, setCount] = useState(initial);
-
-  const increment = () => setCount(count + 1);
+function Counter({ value = 1, onChange }) {
   const decrement = () => {
-    if (count > 0) setCount(count - 1);
+    if (value > 0) onChange?.(value - 1);
+  };
+
+  const increment = () => {
+    onChange?.(value + 1);
   };
 
   return (
@@ -16,7 +16,7 @@ function Counter({ initial = 1 }) {
       <button onClick={decrement} className={styles.btn}>
         <RemoveIcon />
       </button>
-      <span className={styles.value}>{count}</span>
+      <span className={styles.value}>{value}</span>
       <button onClick={increment} className={styles.btn}>
         <AddIcon />
       </button>

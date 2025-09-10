@@ -1,16 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import TitlePlusBtn from "../../../components/titlePlusBtn";
 import styles from "./styles.module.css";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchProducts } from "../../../redux/slices/productSlice";
 import ProductItem from "../../../components/productItem";
 
 function SaleSection() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const { items, status, error } = useSelector((state) => state.products);
+  const { items } = useSelector((state) => state.products);
 
   useEffect(() => {
     dispatch(fetchProducts());
