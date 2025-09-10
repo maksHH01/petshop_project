@@ -53,21 +53,46 @@ function Basket() {
         buttonText={"Back to the store"}
         buttonLink={"/products"}
       />
-      <ul className={styles.list}>
-        {products.map((item, index) => (
-          <BasketItem
-            key={`${item.id}-${index}`}
-            item={item}
-            onRemove={handleRemove}
-            onQuantityChange={handleQuantityChange}
-          />
-        ))}
-      </ul>
-      <div className={styles.summary}>
-        <p>Total items: {totalQuantity}</p>
-        <p>Total price: ${totalPrice.toFixed(2)}</p>
+
+      <div className={styles.itemAndFormContainer}>
+        <ul className={styles.list}>
+          {products.map((item, index) => (
+            <BasketItem
+              key={`${item.id}-${index}`}
+              item={item}
+              onRemove={handleRemove}
+              onQuantityChange={handleQuantityChange}
+            />
+          ))}
+        </ul>
+
+        <form className={styles.form}>
+          <h3 className={styles.title}>Order details</h3>
+          <p className={styles.itemsScore}>{totalQuantity} items</p>
+          <div className={styles.sumContainer}>
+            <p className={styles.itemsScore}>Total</p>
+            <h2>${totalPrice.toFixed(2)}</h2>
+          </div>
+          <div className={styles.inputs}>
+            <input
+              className={styles.inputsStyle}
+              type="text"
+              placeholder="Name"
+            />
+            <input
+              className={styles.inputsStyle}
+              type="number"
+              placeholder="Phone number"
+            />
+            <input
+              className={styles.inputsStyle}
+              type="email"
+              placeholder="Email"
+            />
+          </div>
+          <PrimaryButton>Order</PrimaryButton>
+        </form>
       </div>
-      <PrimaryButton onClick={handleClear}>Clear Basket</PrimaryButton>
     </div>
   );
 }

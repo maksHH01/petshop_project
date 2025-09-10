@@ -45,7 +45,6 @@ function FirstOrderForm() {
         formData
       );
 
-      //   console.log("Form submitted successfully:", data);
       setSuccess(true);
       setFormData({ name: "", phone: "", email: "" });
     } catch (error) {

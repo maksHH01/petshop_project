@@ -1,5 +1,6 @@
 .productItem {
   max-height: 422px;
+  flex: 1 1 316px;
   max-width: 316px;
   border-radius: 12px;
   border: 1px solid #ddd;
