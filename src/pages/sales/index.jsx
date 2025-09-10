@@ -5,6 +5,7 @@ import ProductItem from "../../components/productItem";
 import CustomBreadcrumbs from "../../components/breadcrumb";
 import CategoryFilters from "../../components/categoryFilters";
 import styles from "./styles.module.css";
+import SkeletonLoader from "../../components/skeleton";
 
 function Sales() {
   const dispatch = useDispatch();
@@ -69,7 +70,7 @@ function Sales() {
     return result;
   }, [products, filters]);
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <SkeletonLoader count={6} height={422} />;
   if (status === "failed") return <p>{error}</p>;
 
   return (

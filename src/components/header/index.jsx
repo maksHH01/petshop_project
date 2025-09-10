@@ -136,7 +136,11 @@ function Header() {
             color="primary"
             overlap="circular"
             showZero
-            classes={{ badge: animate ? styles.badgeAnimate : "" }}
+            classes={{
+              badge: animate
+                ? `${styles.badgeAnimate} ${styles.badgeLeft}`
+                : styles.badgeLeft,
+            }}
           >
             <img src={basketLogo} alt="basketLogo" />
           </Badge>
