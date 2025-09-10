@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromBasket,
@@ -15,6 +16,11 @@ function Basket() {
     (state) => state.basket
   );
 
+  const [formData, setFormData] = useState({ name: "", phone: "", email: "" });
+  const [submitError, setSubmitError] = useState("");
+  const [success, setSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleRemove = (id) => {
     dispatch(removeFromBasket(id));
   };
@@ -24,8 +30,52 @@ function Basket() {
     dispatch(updateQuantity({ id, quantity: newQuantity }));
   };
 
-  const handleClear = () => {
-    dispatch(clearBasket());
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const validate = () => {
+    if (
+      !formData.name.trim() ||
+      !formData.phone.trim() ||
+      !formData.email.trim()
+    ) {
+      return "Please fill in all fields";
+    }
+    return null;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError("");
+    setSuccess(false);
+
+    const validationError = validate();
+    if (validationError) {
+      setSubmitError(validationError);
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      await fetch("http://localhost:3333/order/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, totalQuantity, totalPrice }),
+      });
+
+      setSuccess(true);
+      setFormData({ name: "", phone: "", email: "" });
+      dispatch(clearBasket());
+    } catch (error) {
+      console.error("Error while submitting:", error);
+      setSubmitError("Form submission error. Please try again later.");
+    }
+
+    setIsSubmitting(false);
   };
 
   const products = Object.values(items);
@@ -66,7 +116,7 @@ function Basket() {
           ))}
         </ul>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <h3 className={styles.title}>Order details</h3>
           <p className={styles.itemsScore}>{totalQuantity} items</p>
           <div className={styles.sumContainer}>
@@ -76,21 +126,37 @@ function Basket() {
           <div className={styles.inputs}>
             <input
               className={styles.inputsStyle}
+              name="name"
               type="text"
               placeholder="Name"
+              value={formData.name}
+              onChange={handleChange}
             />
             <input
               className={styles.inputsStyle}
+              name="phone"
               type="number"
               placeholder="Phone number"
+              value={formData.phone}
+              onChange={handleChange}
             />
             <input
               className={styles.inputsStyle}
+              name="email"
               type="email"
               placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
             />
           </div>
-          <PrimaryButton>Order</PrimaryButton>
+
+          <div className={styles.messageContainer}>
+            <span className={styles.error}>{submitError || "\u00A0"}</span>
+          </div>
+
+          <PrimaryButton type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Processing..." : "Place Order"}
+          </PrimaryButton>
         </form>
       </div>
     </div>

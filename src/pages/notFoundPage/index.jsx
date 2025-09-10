@@ -18,6 +18,7 @@ function NotFoundPage() {
           to the homepage.
         </p>
         <PrimaryButton
+          to="/"
           sx={{
             padding: "16px 56px",
           }}
