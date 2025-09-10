@@ -1,8 +1,21 @@
 import PrimaryButton from "../primaryButton";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToBasket } from "../../redux/slices/basketSlice";
 
 function ProductItem({ id, image, title, price, discont_price }) {
+  const dispatch = useDispatch();
+
+  const handleAddToBasket = () => {
+    dispatch(
+      addToBasket({
+        product: { id, title, price, discont_price, image },
+        quantity: 1,
+      })
+    );
+  };
+
   const discountPercent =
     discont_price && price
       ? Math.round(((price - discont_price) / price) * 100)
@@ -19,6 +32,7 @@ function ProductItem({ id, image, title, price, discont_price }) {
           <span className={styles.discountBadge}>-{discountPercent}%</span>
         )}
         <PrimaryButton
+          onClick={handleAddToBasket}
           sx={{
             position: "absolute",
             bottom: 16,

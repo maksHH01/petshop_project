@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-function Counter({ initial = 0 }) {
+function Counter({ initial = 1 }) {
   const [count, setCount] = useState(initial);
 
   const increment = () => setCount(count + 1);

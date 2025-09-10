@@ -1,14 +1,28 @@
-import { Padding } from "@mui/icons-material";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import Counter from "../../../components/counter";
 import PrimaryButton from "../../../components/primaryButton";
 import styles from "./styles.module.css";
 import ReadMoreModal from "../../../components/readMoreModal";
+import { addToBasket } from "../../../redux/slices/basketSlice";
 
-function ProductInfo({ title, image, price, discont_price, description }) {
+function ProductInfo({ id, title, image, price, discont_price, description }) {
+  const dispatch = useDispatch();
+  const [quantity, setQuantity] = useState(1);
+
   const hasDiscount = discont_price && discont_price < price;
   const discountPercent = hasDiscount
     ? Math.round(((price - discont_price) / price) * 100)
     : 0;
+
+  const handleAddToBasket = () => {
+    dispatch(
+      addToBasket({
+        product: { id, title, image, price, discont_price },
+        quantity,
+      })
+    );
+  };
 
   return (
     <div className={styles.productInfo}>
@@ -35,8 +49,9 @@ function ProductInfo({ title, image, price, discont_price, description }) {
         </div>
 
         <div className={styles.cartAddingContainer}>
-          <Counter />
+          <Counter value={quantity} setValue={setQuantity} />{" "}
           <PrimaryButton
+            onClick={handleAddToBasket}
             sx={{
               width: "100%",
               maxWidth: "316px",
