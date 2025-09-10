@@ -49,7 +49,10 @@ function ProductInfo({ id, title, image, price, discont_price, description }) {
         </div>
 
         <div className={styles.cartAddingContainer}>
-          <Counter value={quantity} setValue={setQuantity} />{" "}
+          <Counter
+            value={quantity}
+            onChange={(newQuantity) => setQuantity(newQuantity)}
+          />
           <PrimaryButton
             onClick={handleAddToBasket}
             sx={{

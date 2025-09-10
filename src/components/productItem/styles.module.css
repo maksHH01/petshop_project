@@ -62,13 +62,36 @@
   z-index: 1;
 }
 
+.addButton {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: calc(100% - 32px);
+  max-width: 284px;
+  padding: 16px 32px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 3;
+}
+
 .imageBlock img:hover {
   transform: scale(1.01);
+}
+
+.imageBlock:hover .addButton {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .imageBlock button {
   position: absolute;
   z-index: 3;
+}
+
+.addedButton {
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .imageBlock:hover button {
