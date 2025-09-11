@@ -1,14 +1,11 @@
 import PrimaryButton from "../primaryButton";
 import styles from "./styles.module.css";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToBasket } from "../../redux/slices/basketSlice";
 
 function ProductItem({ id, image, title, price, discont_price }) {
   const dispatch = useDispatch();
-
-  const basket = useSelector((state) => state.basket.items);
-  const isInBasket = Object.values(basket).some((item) => item.id === id);
 
   const handleAddToBasket = () => {
     dispatch(
@@ -34,14 +31,8 @@ function ProductItem({ id, image, title, price, discont_price }) {
         {hasDiscount && (
           <span className={styles.discountBadge}>-{discountPercent}%</span>
         )}
-        <PrimaryButton
-          onClick={handleAddToBasket}
-          disabled={isInBasket}
-          className={`${styles.addButton} ${
-            isInBasket ? styles.addedButton : ""
-          }`}
-        >
-          {isInBasket ? "Added" : "Add to cart"}
+        <PrimaryButton onClick={handleAddToBasket} className={styles.addButton}>
+          Add to cart
         </PrimaryButton>
       </div>
       <div className={styles.infoContainer}>
